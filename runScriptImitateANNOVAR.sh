@@ -11,18 +11,13 @@ do
 		shift
 		;;
 		-h|--help)
-		HELP="TRUE"
+			echo "Usage: runScriptImitateAnnovar -v VCF-file [-h (help)]"
+			exit 0
 		shift
 		;;
 	esac
 done
 set -- "${POSITIONAL[@]}"
-
-if [ ! -z $HELP ]
-then
-	echo "Please provide a VCF file with the -v or --vcf-file command"
-	exit 0
-fi
 
 if [ -z $VCF ]
 then
