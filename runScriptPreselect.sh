@@ -2,7 +2,7 @@
 
 ASMD=140
 CLPM=0
-
+DPASS=false
 POSITIONAL=()
 while [[ $# -gt 0 ]]
 do
@@ -10,6 +10,11 @@ do
 	case $key in
 		-v|--vcf-file)
 		VCF="$2"
+		shift
+		shift
+		;;
+		-d|--deactivate-pass)
+		DPASS=true
 		shift
 		shift
 		;;
@@ -24,7 +29,7 @@ do
 		shift
 		;;
 		-h|--help)
-			echo "Usage: runScriptPreselect.sh -v VCF-file [-a ASMD_threshold (Default: 140)] [-c CLPM_threshold (Default: 0)]"
+			echo "Usage: runScriptPreselect.sh -v VCF-file [-d -a ASMD_threshold -c CLPM_threshold]"
 			exit 0
 		shift
 		;;
@@ -62,6 +67,8 @@ then
 	exit -5
 fi
 
-($FUNC "^#" $VCF; $FUNC "PASS" $VCF | awk -F$'\t' -v CLPM=$CLPM -v ASMD=$ASMD '{split($0,a,"\t"); n=split(a[8],b,";"); for(i=1; i<=n; i++){if(b[i]~/CLPM/){split(b[i],c,"=")}else if(b[i]~/ASMD/){split(b[i],d,"=")}}; if(c[2] == CLPM && d[2] >= ASMD){print}}')
+PRESENT=$( $FUNC -P 'CLPM|ASMD' $VCF | wc -l )
+
+($FUNC '^#' $VCF; $FUNC $( [[ "$DPASS" = true ]] && echo '.*' || echo 'PASS') $VCF | awk -F$'\t' -v CLPM=$CLPM -v ASMD=$ASMD -v PRESENT=$PRESENT '(PRESENT > 0){split($0,a,"\t"); n=split(a[8],b,";"); for(i=1; i<=n; i++){if(b[i]~/CLPM/){split(b[i],c,"=")}else if(b[i]~/ASMD/){split(b[i],d,"=")}}; if(c[2] == CLPM && d[2] >= ASMD){print}} (PRESENT == 0){print}')
 
 exit 0
