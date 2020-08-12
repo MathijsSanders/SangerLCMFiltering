@@ -58,14 +58,20 @@ The following parameters are available:
 Parameter | Description
 --- | ---
 -v/--vcf-file* | Input VCF file (either vcf or vcf.gz)
+<<<<<<< HEAD
 -d/--deactivate-pass | Do not filter variants based of the 'PASS' flag (Default: variants filtered on PASS)
+=======
+>>>>>>> af94a175107a01a027c85453d2973441f5560e11
 -a/--asmd | ASMD score (CaVEMan) threshold (Default: 140)
 -c/--clpm | CLPM score (CaVEMan) threshold (Default: 0)
 -h/--help | Help information
 \* | Required
 
+<<<<<<< HEAD
 Filtering on ASMD and CLPM is skipped when this information is absent from the VCF file.
 
+=======
+>>>>>>> af94a175107a01a027c85453d2973441f5560e11
 **imitateANNOVAR**
 
 The following parameters are available:
