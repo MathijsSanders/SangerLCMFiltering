@@ -64,7 +64,7 @@ Parameter | Description
 -h/--help | Help information
 \* | Required
 
-Filtering on ASMD and CLPM is skipped when this information is absent from the VCF file.
+Filtering on the ASMD and CLPM flags is skipped when this information is absent from the VCF file (non-CaVEMan variant detection).
 
 **imitateANNOVAR**
 
