@@ -40,7 +40,7 @@ ANNOVAR is a software tool to functionally annotate called variants (http://anno
 The complete pipeline has been installed in a Singularity container. Please run the following:
 
 ```bash
-singularity pull shub://MathijsSanders/SangerLCMFiltering
+singularity pull shub://MathijsSanders/SangerLCMFilteringSingularity
 ```
 
 This includes the following apps:
